@@ -1,0 +1,104 @@
+<apex:page sidebar="false" showHeader="false" Controller="homepage" >
+<style type="text/css">
+p { font-weight: bold; }
+</style>
+<p><center> <font size="6" color="BLUE"> <b> HOSPITAL MANAGEMENT SYSTEM </b> </font></center> </p>
+  
+  <apex:form >
+  <apex:pageBlock title="NEW ENTRIES">
+  <center>
+  <apex:commandButton value="New Patient" action="https://c.ap2.visual.force.com/apex/patients?sfdc.tabName=01r28000000UAYC"/>
+  <apex:commandButton value="New Doctor" action="https://c.ap2.visual.force.com/apex/Doctors?sfdc.tabName=01r28000000UAg1"/>
+  <apex:commandButton value="New Appointment" action="https://c.ap2.visual.force.com/apex/Appointments?sfdc.tabName=01r28000000UAoU"/>
+  </center>
+</apex:pageBlock>
+<apex:pageBlock title="PATIENT DETAILS">
+
+       <apex:pageBlockButtons location="top"> 
+       <!-- <apex:commandButton value="New Patient"  action="/apex/patients?sfdc.tabName=01r28000000UAYC"/> -->
+       <apex:commandButton value="New Patient"  action="/apex/patients"/>
+       </apex:pageBlockButtons>
+  
+       <apex:pageBlockTable value="{!patlists}" var="p">
+       
+       <apex:column style="align:right" headerValue="Patient Names">
+       <apex:outputLink value="/{!p.id}">{!p.Name}</apex:outputLink>
+       </apex:column>
+      
+       <apex:column style="align:left" headerValue="mobile">
+       <apex:outputLink value="/{!p.id}">{!p.Mobile__c}</apex:outputLink>
+       </apex:column>
+       
+       <apex:column style="align:left" headerValue="Appointments">
+       <apex:repeat value="{!p.Appointments__r}" var="b">
+       <apex:outputLink value="/{!b.id}">{!b.Name}</apex:outputLink><br/>
+       </apex:repeat>
+       </apex:column>
+       
+       <apex:column style="align:left" headerValue="Appointment Date">
+       <apex:repeat value="{!p.Appointments__r}" var="a"><br/>
+       {!a.Appointment_Date__c}
+       </apex:repeat>
+       </apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+
+<apex:pageBlock title="DOCTOR DETAILS" >
+       <apex:pageBlockButtons location="top"> 
+       <!-- <apex:commandButton value="New Doctor" action="/apex/Doctors?sfdc.tabName=01r28000000UAg1"/> -->
+       <apex:commandButton value="New Doctor" action="/apex/Doctors"/>
+       </apex:pageBlockButtons>
+  
+       <apex:pageBlockTable value="{!doclists}" var="d">
+       
+       <apex:column style="align:right" headerValue="Doctor Names">
+       <apex:outputLink value="/{!d.id}">{!d.Name}</apex:outputLink>
+       </apex:column>
+      
+       <apex:column style="align:left" headerValue="mobile">
+       <apex:outputLink value="/{!d.id}">{!d.Mobile__c}</apex:outputLink>
+       </apex:column>
+       
+       <apex:column style="align:left" headerValue="Appointments">
+       <apex:repeat value="{!d.Appointments__r}" var="a">
+       <apex:outputLink value="/{!a.id}">{!a.Name}</apex:outputLink>
+       </apex:repeat>
+       </apex:column>
+       
+       <apex:column style="align:left" headerValue="Appointment Date">
+       <apex:repeat value="{!d.Appointments__r}" var="b">
+       {!b.Appointment_Date__c}
+       </apex:repeat>
+       </apex:column>
+       
+</apex:pageBlockTable>
+</apex:pageBlock>
+
+<apex:pageBlock title="APPOINTMENT DETAILS" >
+       <apex:pageBlockButtons location="top">
+       <!-- <apex:commandButton value="New Appointment" action="/apex/Appointments?sfdc.tabName=01r28000000UAoU"/> -->
+       <apex:commandButton value="New Appointment" action="/apex/Appointments"/>
+       </apex:pageBlockButtons>
+       <apex:pageBlockTable value="{!applists}" var="a">
+       
+       <apex:column style="align:right" headerValue="Appointment No">
+       <apex:outputLink value="/{!a.id}">{!a.Name}</apex:outputLink>
+       </apex:column>
+       
+       <apex:column style="align:left" headerValue="Patient Name">
+      <apex:outputLink value="/{!a.id}">{!a.Patient__r.Name}</apex:outputLink>
+      </apex:column>
+      
+      <apex:column style="align:left" headerValue="Appoinment Date">
+      <apex:outputLink value="/{!a.id}">{!a.Appointment_Date__c}</apex:outputLink>
+      </apex:column>
+      
+      <apex:column style="align:left" headerValue="Doctor Name">
+      <apex:outputLink value="/{!a.id}">{!a.Doctor__r.Name}</apex:outputLink>
+      </apex:column>
+      
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

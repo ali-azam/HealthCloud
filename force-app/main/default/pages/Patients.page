@@ -1,0 +1,31 @@
+<apex:page sidebar="false" showHeader="false" controller="PatientController">
+    <script>
+        function showAlert() {
+            var pNameValue = document.getElementById('{!$Component.apForm.pageBlockId.pageBlockSectioId.pId}').value;
+            alert(pNameValue);
+        }
+
+    </script>
+<apex:form id="apForm">
+<apex:pageBlock id="pageBlockId" title="NEW PATIENT DETAILS">
+
+        <apex:pageBlockSection id="pageBlockSectioId">
+        <apex:inputField id="pId" value="{!p.Name}" required="true"/>
+        <apex:inputField value="{!p.Address__c }"/>
+        <apex:inputField value="{!p.Blood_Group__c}"/>
+        <apex:inputField value="{!p.DOB__c}"/>
+        <apex:inputField value="{!p.Email__c}"/>
+        <apex:inputField value="{!p.Gender__c}"/>
+        <apex:inputField value="{!p.Mobile__c}"/>
+        </apex:pageBlockSection>
+
+        <apex:pageBlockButtons >
+        <apex:commandButton value="Save" action="{!save}"/>
+        <apex:commandButton value="Save & New" action="{!saveandnew}" onclick="showAlert();"/>
+        <apex:commandButton value="Cancel" action="/apex/homepage" immediate="true"/>
+        </apex:pageBlockButtons>
+    
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>
